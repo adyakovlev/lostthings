@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      overflow: hidden;
+      background-image: url("a.png");
+      background-size: cover;
+      filter: blur(5px);
+      transition: filter 0.5s ease;
+      display: flex;
+      align-items: flex-start; /* Align text to the top */
+      justify-content: flex-start; /* Align text to the left */
+      flex-direction: column;
+      padding: 20px;
+      height: 100vh; /* Set full height */
+      font-family: Arial, sans-serif; /* Use Arial font */
+      font-size: 10px; /* Adjust font size as needed */
+    }
+    
+    h1, h2 {
+      color: white;
+      font-weight: 100; /* Thin font weight */
+    }
+
+    h1 {
+      white-space: pre-line;
+      word-break: break-word;
+      max-width: 600px; /* Adjust max-width as needed */
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      text-align: right;
+    }
+
+    h2 {
+      white-space: pre-line;
+      word-break: break-word;
+      max-width: 1000px; /* Adjust max-width as needed */
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+      text-align: left;
+    }
+
+    .object {
+      position: absolute;
+      width:140px;
+      height: 140px;
+      background-size: cover;
+      background-position: center;
+      cursor: pointer;
+      filter: blur(4px);
+      transition: filter 0.5s ease;
+    }
+
+    .description {
+      position: absolute;
+      display: none;
+      background-color: rgba(255, 255, 255, 0.8);
+      padding: 10px;
+      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      max-width: 200px; /* Set max-width to 200px */
+    }
+
+    .description-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .description-meta {
+      font-style: italic;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>/.. some things ive lost since 2006</h1>
+
+  <script>
+    const numberOfObjects = 21;
+    const photoUrls = ['1.png', '2.png', '3.png', '4.png', '5.png', '7.png', '8.png', '9.png', '10.png', '11.png', '13.png', '14.png', '15.png', '16.png', '17.png', '18.png', '20.png', '21.png', '22.png', '23.png', '24.png', ];
+
+    const objectDescriptions = [
+      { name: 'silver cross', year: '2006', place: 'mytishchi', description: 'in kindergarten i was very curious about it. was biting it every day. mom was really angry. one day during a quiet hour i cut the chain, cross fall down and i couldnt find it.', audio: '1.mp3' },
+      { name: 'che guevara cap', year: '2010', place: 'mytishchi', description: 'in 2010, my dad went to cuba and brought me a cap with a portrait of che guevara. fist time i took it with me, i forgot it in school after my breakdance class. the next day i was hit by a car and spent several months in the hospital. when i returned to school the cap was not there anymore', audio: '2.mp3' },
+      { name: 'my fav tent', year: '2010', place: 'deulino', description: 'my favourite tent in which I played throughout my childhood. at some point i went out to have a dinner, the wind rose and blew the tent off the site with all my toys. my great-grandmother ran after it through the neighbouring, but did not find her. after she said that when she reached the river she saw that someone was putting a similar tent in their car.', audio: '3.mp3' },
+      { name: 'school shoes', year: '2008', place: 'mytishchi', description: 'in first grade i really liked these boots, especially the holes in them. i was putting coloured pencils in them and imagined that i was a wolverine. the teachers were very unhappy with my behaviour. one morning, i couldn’t find them at home. maybe mom threw it away...', audio: '5.mp3' },
+      { name: 'spider man cards', year: '2010', place: 'mytishchi', description: 'back in the day, spider-man magazines with cards were really popular. they were expensive, and i had almost no pocket money. so one time i stole 50 euros from my mother’s wallet and bought a lot of cards. there were so many,  so I decided to bring them home in parts so that parents wouldn’t detect me. i took some of it and put the rest under the kiosk. but when we came home, parents said that we were urgently leaving to visit relatives. when i returned, of course, there were no cards at the kiosk.', audio: '6.mp3' },
+      { name: 'tulips for mom', year: '2010', place: 'mytishchi', description: 'on march 8, 2011 father gave me some money to buy flowers. for mother and school teachers. i bought but still had some money. my friend and i decided to buy more and give them to every women we met. it was cold, so we put flowers next to my home, took a few at and went to make presents. was really cute and funny action. but when we returned for the next batch, we saw that all our flowers had been stolen.', audio: '7.mp3' },
+      { name: 'football form', year: '2010', place: 'mytishchi', description: 'at the age of 10, i wanted to become a football player. right before the 2010 World cup, my parents gave me boots and a new uniform for the russian national team (original adilas!!) with my last name in the back. i was incredibly happy. a couple of months later uniform disappeared in school. and then a boy from a parallel class started wearing the same uniform with same last name. for a few more years i thought that he was just a fan of the football player YAKOVLEV (there have never been such football players in the national team)', audio: '8.mp3' },
+      { name: 'mongoose', year: '2012', place: 'mytishchi', description: 'my favourite sleep toy since childhood. unfortunately can’t remember its name anymore. over the 10 years, it gradually became bald and scary. disappeared at one point. I think mother threw it out.', audio: '9.mp3' },
+      { name: 'shoe bags', year: '2012', place: 'mytishchi', description: 'can’t remember this story. asked my mother what essential things i lost as a child. she said this', audio: '10.mp3' },
+      { name: '1.5g of weed', year: '2018', place: 'rome', description: 'for my 18th birthday, my parents gave me money for a trip to rome. went together with my girlfriend. on the first days we bought weed on the street. bought so much that we didn’t finish it until the end of the trip. i was really high the last night and thought that the police would dwfenetely come to check it, so i hid it somewhere in a suitcase. in the morning we woke up and realized that we were late for the plane. we ran with our suitcases across the whole of city to catch the transfer. in the end, we missed the plane and flew on the next one. and only at the russian border i remembered what i hid in my suitcase. fortunately there was nothing in the there, but it was the most stressful experience in my life. ', audio: '11.mp3' },
+      { name: 'ulysses', year: '2019', place: 'moscow', description: 'was standing untouched like an icon in the red corner of the room for three years. then disappeared. i think some of my friends stole it.', audio: '12.mp3' },
+      { name: 'new passport', year: '2020', place: 'moscow', description: 'got drunk and left my new passport in the subway. just at the exit of the subway i received a notification in a telegram with a photo of my passport from an unfamiliar number. i opened the notification but the message was already deleted. had to go to the police to made a missing report', audio: '13.mp3' },
+      { name: 'classmate tripod ', year: '2020', place: 'moscow', description: 'was filming my first big video. i didn’t have any money, so i borrowed all equipment. tripod i borrowed from a classmate who I really didnt like. it was uncomfortable, but there was nothing to do. and of course, it was the only thing that disappeared from all the equipment.', audio: '14.mp3' },
+      { name: 'conica x35', year: '2023', place: 'istanbul', description: 'during the mutiny of rus army, met with friends in Istanbul to play petanque. I was  taking pictures of the night and got terribly drunk. lost everyone. can remember lying on the road and crying that I couldn’t find my girlfriend. in the morning discovered that also left the camera in the park. ', audio: '15.mp3' },
+      { name: 'right 6th teeth', year: '2021', place: 'moscow', description: 'i used to love skittles a lot. was eating a pack a day. but then my teeth started to hurt. first, one bottom 6th, then the second. had to go to the doctor. the pain was nerve inflammation. tgey removed me 2 teeth. i have never had pain as bad as this. a month later I decided to try skittles again and inflammation started again! again they removed my tooth and i decided to keep it as a souvenir. since then i have no tooth, but unfortunately I lost the souvenir somewhere.', audio: '16.mp3' },
+      { name: 'parent apartment keys', year: '2022', place: 'moscow', description: 'back in the day i worked in a museum of moscow. was opening the exhibition. met all the Moscow bohemia and was showing what we had done. "belenkaya" vodka was the sponsor of the exhibition, so everyone got drunk very quickly. then we went to a drink shop, got even more drunk, i spent all my money and walked home alone. i arrived at about 7 oclock and realized that i had lost my keys. decided not to ring the doorbell to wake anyone up and wait a bit. in the end i fall asleep on the stairwell. mom said that they couldn’t open the door to go to school with my sister. blocked it with my body. this morning was not a very comfortable conversation. funny thing is that the door was open all night), audio: ', audio: '11.mp3' },
+      { name: 'icon of st. andrew', year: '2022', place: 'ozernoe', description: 'my mother gave me the icon when I left russia. was really serious about it. i put it in my bag and sat in the car to the boarder. the border was quite difficult; we stood in the field without food or water for more than three days. dropped it somewhere there.', audio: '2.mp3' },
+      { name: 'iphone 13', year: '2022', place: 'istanbul', description: 'ive just arrived in istanbul, was partying a lot. while standing in line for wine, a guy appeared next to me. twitched, got nervous, and then abruptly ran away. i thought he forgot something at home. and then i realized that he was standing in the same place where my phone was. and he run away with it. a month later, a phone signal appeared at 3am in fatih. decided to try to find. imagined some grandfather in services trying to hack my phone. but i met several groups of a bit gloomy young guys. i thought that my phone is not worth trying to find out something from them.', audio: '3.mp3' },
+      { name: 'film tape', year: '2022', place: 'istanbul', description: 'i decided to make a photo project about a soap bubble over the bosphorus, between east and west. i climbed onto the main bridge. took me probably two hours. i almost reached the halfway point and started filming. 10 minutes later the hand of a turkish policeman falls on my shoulder. guys put me in the car. it turned out that there was a military base right under the bridge. they let me go, but I had to give up the entire film.', audio: '5.mp3' },
+      { name: 'roots video', year: '2023', place: 'istanbul', description: 'with amaya we filmed a video about a man who grows roots instead of body parts. we found branches, made a costume, i walked around the neighbourhood of tarlabashi in that. at some point she decided to film me from a distance. a turk guy approached her and began asking her to go with him. showed a knife. coming up to me she said that im her husband. he went away. but because of nerves she dropped the camera. as a result, all the work was lost.', audio: '6.mp3' },
+      { name: 'telegram channel history', year: '2023', place: 'istanbul', description: 'the telegram channel in which ive been writing my poems for the last two years was tied to a russian number. it was handed over to some vladimir and he decided to erase everything there. thank you vladimir)', audio: '.mp3' },
+      // Add more descriptions for each object as needed
+    ];
+
+    let clickedObject = null;
+    let blurTimeout;
+
+    function createObject(index) {
+      const object = document.createElement('div');
+      object.className = 'object';
+      document.body.appendChild(object);
+
+      const photoUrl = photoUrls[index];
+      object.style.backgroundImage = `url(${photoUrl})`;
+
+      const description = document.createElement('div');
+      description.className = 'description';
+      document.body.appendChild(description);
+
+      const audio = new Audio();
+      document.body.appendChild(audio);
+
+      object.addEventListener('click', () => {
+        if (clickedObject) {
+          clickedObject.element.style.filter = 'blur(5px)';
+        }
+
+        const objectData = getObjectData(index);
+        description.innerHTML = `
+          <div class="description-title">${objectData.name}</div>
+          ${objectData.description}
+          <div class="description-meta"><em>${objectData.place}, ${objectData.year}</em></div>
+        `;
+
+        audio.src = objectData.audio;
+        audio.play();
+
+        const rect = object.getBoundingClientRect();
+        description.style.left = `${rect.right + 10}px`;
+        description.style.top = `${rect.top}px`;
+        description.style.display = 'block';
+
+        clickedObject = { element: object };
+        clearTimeout(blurTimeout);
+        object.style.filter = 'blur(0px)';
+        document.body.style.filter = 'blur(0px)';
+      });
+
+      return {
+        element: object,
+        description: description,
+        x: Math.random() * (window.innerWidth - 100),
+        y: Math.random() * (window.innerHeight - 100),
+        speedX: (Math.random() - 0.5) * 3,
+        speedY: (Math.random() - 0.5) * 3,
+      };
+    }
+    function adjustVolume(audio, volume) {
+      if (audio) {
+        audio.volume = volume;
+      }
+      function fadeInOut(audio, fadeInTime, fadeOutTime) {
+      const fadeInInterval = 10;
+      const fadeOutInterval = 10;
+      const maxVolume = 0.5;
+
+      let currentVolume = 0;
+
+      const fadeInOutFunc = () => {
+        if (currentVolume < maxVolume && fadeInTime > 0) {
+          currentVolume += maxVolume / (fadeInTime / fadeInInterval);
+        } else if (fadeOutTime > 0) {
+          currentVolume -= maxVolume / (fadeOutTime / fadeOutInterval);
+        }
+
+        adjustVolume(audio, Math.max(0, Math.min(maxVolume, currentVolume)));
+
+        if (currentVolume > 0 || fadeOutTime > 0) {
+          requestAnimationFrame(fadeInOutFunc);
+        }
+      };
+
+      fadeInOutFunc();
+    }
+    }
+    function getObjectData(index) {
+      return objectDescriptions[index] || {};
+    }
+
+    const objects = Array.from({ length: numberOfObjects }, (_, index) => createObject(index));
+
+    function checkCollision(obj1, obj2) {
+      return (
+        obj1.x < obj2.x + 100 &&
+        obj1.x + 100 > obj2.x &&
+        obj1.y < obj2.y + 100 &&
+        obj1.y + 100 > obj2.y
+      );
+    }
+
+    function update() {
+      objects.forEach((object) => {
+        object.x += object.speedX;
+        object.y += object.speedY;
+
+        if (object.x > window.innerWidth - 100 || object.x < 0) {
+          object.speedX *= -1;
+        }
+
+        if (object.y > window.innerHeight - 100 || object.y < 0) {
+          object.speedY *= -1;
+        }
+
+        objects.forEach((otherObject) => {
+          if (object !== otherObject && checkCollision(object, otherObject)) {
+            object.speedX *= 1;
+            object.speedY *= 1;
+          }
+        });
+
+        object.element.style.transform = `translate(${object.x}px, ${object.y}px)`;
+      });
+
+      requestAnimationFrame(update);
+    }
+
+    window.addEventListener('mousemove', () => {
+      if (clickedObject) {
+        clickedObject.element.style.filter = 'blur(5px)';
+        clickedObject = null;
+      }
+
+      clearTimeout(blurTimeout);
+      blurTimeout = setTimeout(() => {
+        if (!clickedObject) {
+          document.body.style.filter = 'blur(5px)';
+        }
+      }, 5000);
+    });
+
+    update();
+  </script>  
+</body>
+</html>
